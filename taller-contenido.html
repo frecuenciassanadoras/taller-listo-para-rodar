@@ -26,7 +26,7 @@
             background-color: #161b22;
             border-radius: 0.5rem;
             padding: 1.5rem;
-            position: relative;
+            position: relative; /* SOLUCIÓN: Cambiado a posición relativa por defecto */
         }
         .module-list li {
             padding: 0.75rem 0;
@@ -126,13 +126,6 @@
     </style>
 </head>
 <body>
-    <script>
-        // SOLUCIÓN: Si no hay sesión iniciada, redirige al login
-        if (!sessionStorage.getItem('isLoggedIn')) {
-            window.location.href = 'taller.html';
-        }
-    </script>
-    
     <button class="hamburger-menu md:hidden" onclick="toggleMenu()">
         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -161,7 +154,7 @@
                 <li onclick="loadModule('modulos/modulo10.html', this)">Módulo 9: El Poder del Amor Propio</li>
                 <li onclick="loadModule('modulos/modulo11.html', this)">Módulo 10: Tu Nueva Realidad Energética</li>
             </ul>
-            <a href="index.html" class="logout-button mt-4">Cerrar Sesión</a>
+            <button id="logout-button" class="logout-button mt-4">Cerrar Sesión</button>
         </div>
         
         <div class="content-area">
@@ -197,6 +190,7 @@
                 const html = await response.text();
                 moduleContentDiv.innerHTML = html;
                 
+                // Cerrar el menú después de cargar el módulo en móvil
                 if (window.innerWidth < 768) {
                     toggleMenu();
                 }
@@ -217,6 +211,11 @@
                 loadModule(moduleFileName, firstModuleItem);
             }
         });
+
+        document.getElementById('logout-button').onclick = () => {
+            sessionStorage.removeItem('isLoggedIn');
+            window.location.href = 'login.html';
+        };
     </script>
 </body>
 </html>
