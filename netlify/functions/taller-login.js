@@ -1,49 +1,69 @@
-import { createClient } from '@supabase/supabase-js';
+// Archivo: netlify/functions/taller-login.js
 
-// La función que se ejecutará cuando el cliente intente acceder al taller
+const { createClient } = require('@supabase/supabase-js');
+const bcrypt = require('bcryptjs');
+
 exports.handler = async (event) => {
-  // Solo aceptamos solicitudes POST
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
-  }
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method Not Allowed" };
+  }
 
-  // Obtenemos los datos del cliente (email y password)
-  const { email, password } = JSON.parse(event.body);
+  const { email, password } = JSON.parse(event.body);
 
-  // Verificamos que el email y la contraseña no estén vacíos
-  if (!email || !password) {
-    return { statusCode: 400, body: "Email and password are required" };
-  }
+  if (!email || !password) {
+    return { statusCode: 400, body: "Email and password are required" };
+  }
 
-  // Aquí necesitas la URL y la API Key de Supabase
-  const SUPABASE_URL = "https://dothtuwrsplezhaxkjmw.supabase.co"; // URL de tu proyecto
-  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRvdGh0dXdyc3BsZXpoYXhramwNCiBw.B13yokCG9VQ49kjZ5pHeBdqBtW7i2CP8yg2l2Ekhqnc";
+  // Usamos variables de entorno para mayor seguridad
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_KEY;
 
-  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+  // Verificamos que las variables de entorno estén cargadas
+  if (!supabaseUrl || !supabaseKey) {
+      return {
+          statusCode: 500,
+          body: JSON.stringify({ message: "Las variables de entorno de Supabase no están configuradas." })
+      };
+  }
 
-  // Consulta la tabla 'taller_usuarios' para autenticar
-  const { data: usuarios, error } = await supabase
-    .from('taller_usuarios') // <-- La tabla del taller
-    .select('email, password')
-    .eq('email', email)
-    .single();
+  const supabase = createClient(supabaseUrl, supabaseKey);
 
-  if (error || !usuarios) {
-    return {
-      statusCode: 401,
-      body: JSON.stringify({ message: "Credenciales incorrectas" }),
-    };
-  }
+  try {
+    // Consulta la tabla 'taller_usuarios'
+    const { data: usuario, error } = await supabase
+      .from('taller_usuarios')
+      .select('email, password')
+      .eq('email', email)
+      .single();
 
-  if (usuarios.password !== password) {
-    return {
-      statusCode: 401,
-      body: JSON.stringify({ message: "Credenciales incorrectas" }),
-    };
-  }
+    if (error || !usuario) {
+      return {
+        statusCode: 401,
+        body: JSON.stringify({ message: "Credenciales incorrectas" }),
+      };
+    }
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ message: "Acceso al taller exitoso!" }),
-  };
+    // Comparamos la contraseña ingresada con la contraseña hasheada en la base de datos
+    const passwordMatch = await bcrypt.compare(password, usuario.password);
+
+    if (!passwordMatch) {
+      return {
+        statusCode: 401,
+        body: JSON.stringify({ message: "Credenciales incorrectas" }),
+      };
+    }
+
+    // Si todo es correcto, devolvemos un estado 200 (éxito)
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: "Acceso al taller exitoso!" }),
+    };
+
+  } catch (err) {
+    // Captura cualquier otro error del servidor
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: "Error en el servidor. Intenta de nuevo." }),
+    };
+  }
 };
