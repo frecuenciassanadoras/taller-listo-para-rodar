@@ -8,11 +8,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <script>
-        // LÓGICA DE PROTECCIÓN SEGURA: Verifica la sesión con Supabase
+        // Inicializa el cliente de Supabase con tus credenciales.
         const supabaseUrl = 'https://dothtuwrsplezhaxkjmw.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRvdGh0dXdyc3BsZXpoYXhram13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU2NzIzMjEsImV4cCI6MjA3MTI0ODMyMX0.B13yokCG9VQ49kjZ5pHeBdqBtW7i2CP8yg2l2Ekhqnc';
         const supabase = Supabase.createClient(supabaseUrl, supabaseKey);
 
+        // LÓGICA DE PROTECCIÓN SEGURA: Verifica la sesión con Supabase
         async function checkAuth() {
             const { data: { session }, error } = await supabase.auth.getSession();
             if (error || !session) {
@@ -24,12 +25,11 @@
         // Ejecuta la verificación al cargar la página.
         checkAuth();
     </script>
-
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-    
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -84,7 +84,6 @@
         .prose-invert h1, .prose-invert h2, .prose-invert h3, .prose-invert h4, .prose-invert strong, .prose-invert em {
             color: #fff !important;
         }
-        
         @media (max-width: 767px) {
             .container {
                 flex-direction: column;
@@ -130,7 +129,6 @@
                 cursor: pointer;
             }
         }
-        
         .backdrop {
             position: fixed;
             top: 0;
@@ -195,7 +193,6 @@
         const sidebar = document.getElementById('sidebar');
         const backdrop = document.querySelector('.backdrop');
         
-        // Función para cargar el módulo, esta parte está bien.
         async function loadModule(moduleFileName, element) {
             try {
                 welcomeMessageDiv.classList.add('hidden');
@@ -244,7 +241,6 @@
 
         // Asigna la función de logout al botón
         document.getElementById('logout-button').onclick = logout;
-
     </script>
 </body>
 </html>
