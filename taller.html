@@ -3,147 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso al Taller</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: #111827;
-            font-family: 'Inter', sans-serif;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 1rem;
-            box-sizing: border-box;
-        }
-        .container {
-            background: rgba(31, 41, 55, 0.9);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
-            padding: 2rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            max-width: 450px;
-            width: 100%;
-        }
-        .input-field {
-            background-color: #374151;
-            border: 1px solid #4b5563;
-            color: #fff;
-        }
-        .button-primary {
-            background: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
-            transition: transform 0.2s ease-in-out;
-        }
-        .button-primary:hover {
-            transform: scale(1.03);
-        }
-        .whatsapp-button {
-            background-color: #25d366;
-            transition: transform 0.2s ease-in-out;
-        }
-        .whatsapp-button:hover {
-            transform: scale(1.03);
-        }
-        .hotmart-button {
-            background-color: #ff8c00;
-            transition: transform 0.2s ease-in-out;
-        }
-        .hotmart-button:hover {
-            transform: scale(1.03);
-        }
-    </style>
+    <title>Taller de Transformación Energética</title>
+    
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</head>
-<body>
-    <div class="container max-w-sm w-full">
-        <h1 class="text-3xl font-bold text-center mb-6">Iniciar Sesión</h1>
-        <form id="login-form-taller" class="flex flex-col gap-4">
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-400">Correo Electrónico</label>
-                <input type="email" id="email-taller" name="email" required class="input-field mt-1 block w-full rounded-md shadow-sm p-3">
-            </div>
-            <div>
-                <label for="password" class="block text-sm font-medium text-gray-400">Contraseña</label>
-                <input type="password" id="password-taller" name="password" required class="input-field mt-1 block w-full rounded-md shadow-sm p-3">
-            </div>
-            <button type="submit" class="button-primary mt-4 w-full text-white font-bold py-3 px-4 rounded-lg shadow-lg">
-                Acceder al Taller
-            </button>
-        </form>
-
-        <div class="mt-8 text-center">
-            <p class="text-gray-400 text-sm italic mb-4">
-                No postergues tu despertar, tu momento es hoy. Dentro encontrarás 10 módulos con prácticas energéticas, meditaciones, rituales y recursos para elevar tu vibración y transformar tu vida desde adentro.
-            </p>
-            <a href="https://pay.hotmart.com/J99664409O?off=ompz33n5&checkoutMode=10" target="_blank" class="w-full mt-2 text-white font-bold py-3 px-4 rounded-lg shadow-lg flex items-center justify-center gap-2 hotmart-button">
-                <span>Unirme al Taller Ahora</span>
-            </a>
-        </div>
-        
-        <div class="mt-8 pt-6 border-t border-gray-700">
-            <p class="text-gray-400 text-sm mb-2">¿Ya adquiriste el taller?</p>
-            <a href="https://wa.link/7eycpg" target="_blank" class="w-full mt-2 text-white font-bold py-3 px-4 rounded-lg shadow-lg flex items-center justify-center gap-2 whatsapp-button">
-                <span>Solicitar contraseña</span>
-            </a>
-        </div>
-
-        <div id="status-message-taller" class="text-center mt-4 text-sm font-medium hidden"></div>
-    </div>
-
+    
     <script>
-        // Inicializa el cliente de Supabase con tus credenciales.
-        // OJO: REEMPLAZA ESTAS URL Y KEY CON LAS TUYAS.
+        // LÓGICA DE PROTECCIÓN SEGURA: Verifica la sesión con Supabase
         const supabaseUrl = 'https://dothtuwrsplezhaxkjmw.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRvdGh0dXdyc3BsZXpoYXhram13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU2NzIzMjEsImV4cCI6MjA3MTI0ODMyMX0.B13yokCG9VQ49kjZ5pHeBdqBtW7i2CP8yg2l2Ekhqnc';
         const supabase = Supabase.createClient(supabaseUrl, supabaseKey);
 
-        document.getElementById('login-form-taller').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const email = document.getElementById('email-taller').value;
-            const password = document.getElementById('password-taller').value;
-            const statusMessage = document.getElementById('status-message-taller');
-            
-            statusMessage.textContent = 'Cargando...';
-            statusMessage.className = 'text-center mt-4 text-sm font-medium text-gray-400';
-            statusMessage.classList.remove('hidden');
+        async function checkAuth() {
+            const { data: { session }, error } = await supabase.auth.getSession();
+            if (error || !session) {
+                // Si hay un error o no hay sesión, redirige al login
+                window.location.href = 'taller.html';
+            }
+        }
+        
+        // Ejecuta la verificación al cargar la página.
+        checkAuth();
+    </script>
 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0d1117;
+            color: #fff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2rem;
+            display: flex;
+            gap: 2rem;
+        }
+        .sidebar {
+            width: 300px;
+            background-color: #161b22;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            position: relative;
+        }
+        .module-list li {
+            padding: 0.75rem 0;
+            cursor: pointer;
+            border-bottom: 1px solid #30363d;
+            transition: color 0.2s;
+        }
+        .module-list li:hover, .module-list li.active {
+            color: #58a6ff;
+        }
+        .content-area {
+            flex-grow: 1;
+            background-color: #161b22;
+            border-radius: 0.5rem;
+            padding: 2rem;
+        }
+        .content-area h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .logout-button {
+            background-color: #e55353;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .logout-button:hover {
+            background-color: #c43838;
+        }
+        .prose-invert h1, .prose-invert h2, .prose-invert h3, .prose-invert h4, .prose-invert strong, .prose-invert em {
+            color: #fff !important;
+        }
+        
+        @media (max-width: 767px) {
+            .container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            .sidebar {
+                width: 75%;
+                max-width: 300px;
+                transform: translateX(-100%);
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                z-index: 50;
+                overflow-y: scroll;
+                transition: transform 0.3s ease-in-out;
+                border-radius: 0;
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .hamburger-menu {
+                position: fixed;
+                top: 1rem;
+                left: 1rem;
+                z-index: 60;
+                background-color: #161b22;
+                padding: 0.5rem;
+                border-radius: 0.25rem;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+            .content-area {
+                margin-top: 4rem;
+                width: 100%;
+            }
+            .close-menu-button {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+            }
+        }
+        
+        .backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+            display: none;
+        }
+        .backdrop.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <button class="hamburger-menu md:hidden" onclick="toggleMenu()">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+    </button>
+    <div class="backdrop" onclick="toggleMenu()"></div>
+
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <button class="close-menu-button md:hidden" onclick="toggleMenu()">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h1 class="text-2xl font-bold mb-4">Módulos del Taller</h1>
+            <ul id="module-list" class="module-list">
+                <li onclick="loadModule('modulos/modulo1.html', this)">Módulo 1: La Llamada Interior</li>
+                <li onclick="loadModule('modulos/modulo2.html', this)">Módulo 2: Comprendiendo Tu Campo Energético</li>
+                <li onclick="loadModule('modulos/modulo3.html', this)">Módulo 3: Limpieza y Protección Energética</li>
+                <li onclick="loadModule('modulos/modulo4.html', this)">BONUS: El Poder De Tu Mente Subconsciente</li>
+                <li onclick="loadModule('modulos/modulo5.html', this)">Módulo 4: Las Frecuencias que Sanan</li>
+                <li onclick="loadModule('modulos/modulo6.html', this)">Módulo 5: Los 7 Chakras + el Chakra del Corazón Superior</li>
+                <li onclick="loadModule('modulos/modulo7.html', this)">Módulo 6: Manifestación desde el Alma</li>
+                <li onclick="loadModule('modulos/modulo8.html', this)">Módulo 7: Códigos Sagrados, Números y Señales</li>
+                <li onclick="loadModule('modulos/modulo9.html', this)">Módulo 8: Sanar el Pasado, Activar el Presente</li>
+                <li onclick="loadModule('modulos/modulo10.html', this)">Módulo 9: El Poder del Amor Propio</li>
+                <li onclick="loadModule('modulos/modulo11.html', this)">Módulo 10: Tu Nueva Realidad Energética</li>
+            </ul>
+            <button id="logout-button" class="logout-button mt-4">Cerrar Sesión</button>
+        </div>
+        
+        <div class="content-area">
+            <div id="welcome-message">
+                <h2 class="text-2xl">¡Bienvenido al Taller!</h2>
+                <p>Haz clic en un módulo de la lista para empezar.</p>
+            </div>
+            <div id="module-content">
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const moduleContentDiv = document.getElementById('module-content');
+        const welcomeMessageDiv = document.getElementById('welcome-message');
+        const moduleList = document.querySelectorAll('.module-list li');
+        const sidebar = document.getElementById('sidebar');
+        const backdrop = document.querySelector('.backdrop');
+        
+        // Función para cargar el módulo, esta parte está bien.
+        async function loadModule(moduleFileName, element) {
             try {
-                // Llama a la función de autenticación de Supabase
-                const { data, error } = await supabase.auth.signInWithPassword({
-                    email: email,
-                    password: password,
-                });
-
-                if (error) {
-                    statusMessage.textContent = error.message || 'Error en el inicio de sesión';
-                    statusMessage.className = 'text-center mt-4 text-sm font-medium text-red-500';
-                } else if (data.user) {
-                    // Guarda el estado de la sesión
-                    sessionStorage.setItem('isLoggedIn', 'true');
-                    
-                    statusMessage.textContent = '¡Inicio de sesión exitoso! Redirigiendo...';
-                    statusMessage.className = 'text-center mt-4 text-sm font-medium text-green-500';
-                    
-                    // Redirige al usuario al panel
-                    setTimeout(() => {
-                        window.location.href = 'taller-contenido.html';
-                    }, 1000);
-                } else {
-                    statusMessage.textContent = 'Credenciales incorrectas.';
-                    statusMessage.className = 'text-center mt-4 text-sm font-medium text-red-500';
+                welcomeMessageDiv.classList.add('hidden');
+                moduleList.forEach(item => item.classList.remove('active'));
+                if (element) {
+                    element.classList.add('active');
+                }
+                const response = await fetch(moduleFileName);
+                if (!response.ok) {
+                    throw new Error('Módulo no encontrado');
+                }
+                const html = await response.text();
+                moduleContentDiv.innerHTML = html;
+                
+                if (window.innerWidth < 768) {
+                    toggleMenu();
                 }
             } catch (error) {
-                console.error('Error en la autenticación:', error);
-                statusMessage.textContent = 'Error de conexión. Intenta de nuevo.';
-                statusMessage.className = 'text-center mt-4 text-sm font-medium text-red-500';
+                moduleContentDiv.innerHTML = `<h2 class="text-red-500">Error: ${error.message}</h2>`;
+            }
+        }
+        
+        // Función para manejar el cierre de sesión con Supabase
+        async function logout() {
+            const { error } = await supabase.auth.signOut();
+            if (error) {
+                console.error('Error al cerrar sesión:', error);
+            } else {
+                // Redirige al usuario al login
+                window.location.href = 'taller.html';
+            }
+        }
+
+        function toggleMenu() {
+            sidebar.classList.toggle('active');
+            backdrop.classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstModuleItem = document.querySelector('.module-list li');
+            if (firstModuleItem) {
+                const moduleFileName = firstModuleItem.getAttribute('onclick').match(/'([^']+)'/)[1];
+                loadModule(moduleFileName, firstModuleItem);
             }
         });
+
+        // Asigna la función de logout al botón
+        document.getElementById('logout-button').onclick = logout;
+
     </script>
 </body>
 </html>
