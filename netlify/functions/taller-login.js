@@ -1,16 +1,16 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Esta es la nueva función que se ejecutará cuando el cliente intente acceder al taller
+// La función que se ejecutará cuando el cliente intente acceder al taller
 exports.handler = async (event) => {
-  // Solo acepta solicitudes POST
+  // Solo aceptamos solicitudes POST
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
-  // Obtiene los datos del cliente (email y password)
+  // Obtenemos los datos del cliente (email y password)
   const { email, password } = JSON.parse(event.body);
 
-  // Verifica que el email y la contraseña no estén vacíos
+  // Verificamos que el email y la contraseña no estén vacíos
   if (!email || !password) {
     return { statusCode: 400, body: "Email and password are required" };
   }
