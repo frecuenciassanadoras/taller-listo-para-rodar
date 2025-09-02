@@ -1,8 +1,8 @@
 {
-  "name": "login-function",
+  "name": "taller-functions",
   "version": "1.0.0",
-  "description": "A simple login function for Supabase",
-  "main": "login.js",
+  "description": "Netlify functions for the workshop",
+  "main": "taller-login.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
