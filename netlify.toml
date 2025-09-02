@@ -1,0 +1,15 @@
+[build]
+  publish = "." # Esto le dice a Netlify que sirva los archivos desde la raíz.
+
+[functions]
+  directory = "netlify/functions" # Directorio de tus funciones.
+
+[[redirects]]
+  from = "/"
+  to = "/login-taller.html"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/login-taller.html"
+  status = 200
