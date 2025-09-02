@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taller de Transformación Energética</title>
+    <script>
+        // LÓGICA DE PROTECCIÓN: Si no hay sesión, redirige al login del taller.
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'taller.html';
+        }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +32,7 @@
             background-color: #161b22;
             border-radius: 0.5rem;
             padding: 1.5rem;
-            position: relative; /* SOLUCIÓN: Cambiado a posición relativa por defecto */
+            position: relative;
         }
         .module-list li {
             padding: 0.75rem 0;
@@ -62,8 +68,7 @@
         .prose-invert h1, .prose-invert h2, .prose-invert h3, .prose-invert h4, .prose-invert strong, .prose-invert em {
             color: #fff !important;
         }
-
-        /* Responsive styles para Mobile */
+        
         @media (max-width: 767px) {
             .container {
                 flex-direction: column;
@@ -190,7 +195,6 @@
                 const html = await response.text();
                 moduleContentDiv.innerHTML = html;
                 
-                // Cerrar el menú después de cargar el módulo en móvil
                 if (window.innerWidth < 768) {
                     toggleMenu();
                 }
@@ -214,7 +218,7 @@
 
         document.getElementById('logout-button').onclick = () => {
             sessionStorage.removeItem('isLoggedIn');
-            window.location.href = 'login.html';
+            window.location.href = 'taller.html';
         };
     </script>
 </body>
