@@ -1,225 +1,225 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taller de Transformación Energética</title>
-    <script>
-        // LÓGICA DE PROTECCIÓN: Si no hay sesión, redirige al login del taller.
-        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
-            window.location.href = 'taller.html';
-        }
-    </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #0d1117;
-            color: #fff;
-        }
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 2rem;
-            display: flex;
-            gap: 2rem;
-        }
-        .sidebar {
-            width: 300px;
-            background-color: #161b22;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            position: relative;
-        }
-        .module-list li {
-            padding: 0.75rem 0;
-            cursor: pointer;
-            border-bottom: 1px solid #30363d;
-            transition: color 0.2s;
-        }
-        .module-list li:hover, .module-list li.active {
-            color: #58a6ff;
-        }
-        .content-area {
-            flex-grow: 1;
-            background-color: #161b22;
-            border-radius: 0.5rem;
-            padding: 2rem;
-        }
-        .content-area h2 {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-        .logout-button {
-            background-color: #e55353;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .logout-button:hover {
-            background-color: #c43838;
-        }
-        .prose-invert h1, .prose-invert h2, .prose-invert h3, .prose-invert h4, .prose-invert strong, .prose-invert em {
-            color: #fff !important;
-        }
-        
-        @media (max-width: 767px) {
-            .container {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-            }
-            .sidebar {
-                width: 75%;
-                max-width: 300px;
-                transform: translateX(-100%);
-                position: fixed;
-                top: 0;
-                left: 0;
-                height: 100%;
-                z-index: 50;
-                overflow-y: scroll;
-                transition: transform 0.3s ease-in-out;
-                border-radius: 0;
-            }
-            .sidebar.active {
-                transform: translateX(0);
-            }
-            .hamburger-menu {
-                position: fixed;
-                top: 1rem;
-                left: 1rem;
-                z-index: 60;
-                background-color: #161b22;
-                padding: 0.5rem;
-                border-radius: 0.25rem;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            }
-            .content-area {
-                margin-top: 4rem;
-                width: 100%;
-            }
-            .close-menu-button {
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-                background-color: transparent;
-                border: none;
-                cursor: pointer;
-            }
-        }
-        
-        .backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 40;
-            display: none;
-        }
-        .backdrop.active {
-            display: block;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller de Transformación Energética</title>
+    <script>
+        // LÓGICA DE PROTECCIÓN: Si no hay sesión, redirige al login del taller.
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'taller.html';
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0d1117;
+            color: #fff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2rem;
+            display: flex;
+            gap: 2rem;
+        }
+        .sidebar {
+            width: 300px;
+            background-color: #161b22;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            position: relative;
+        }
+        .module-list li {
+            padding: 0.75rem 0;
+            cursor: pointer;
+            border-bottom: 1px solid #30363d;
+            transition: color 0.2s;
+        }
+        .module-list li:hover, .module-list li.active {
+            color: #58a6ff;
+        }
+        .content-area {
+            flex-grow: 1;
+            background-color: #161b22;
+            border-radius: 0.5rem;
+            padding: 2rem;
+        }
+        .content-area h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .logout-button {
+            background-color: #e55353;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .logout-button:hover {
+            background-color: #c43838;
+        }
+        .prose-invert h1, .prose-invert h2, .prose-invert h3, .prose-invert h4, .prose-invert strong, .prose-invert em {
+            color: #fff !important;
+        }
+        
+        @media (max-width: 767px) {
+            .container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            .sidebar {
+                width: 75%;
+                max-width: 300px;
+                transform: translateX(-100%);
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                z-index: 50;
+                overflow-y: scroll;
+                transition: transform 0.3s ease-in-out;
+                border-radius: 0;
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .hamburger-menu {
+                position: fixed;
+                top: 1rem;
+                left: 1rem;
+                z-index: 60;
+                background-color: #161b22;
+                padding: 0.5rem;
+                border-radius: 0.25rem;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+            .content-area {
+                margin-top: 4rem;
+                width: 100%;
+            }
+            .close-menu-button {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+            }
+        }
+        
+        .backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+            display: none;
+        }
+        .backdrop.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-    <button class="hamburger-menu md:hidden" onclick="toggleMenu()">
-        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-        </svg>
-    </button>
-    <div class="backdrop" onclick="toggleMenu()"></div>
+    <button class="hamburger-menu md:hidden" onclick="toggleMenu()">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+    </button>
+    <div class="backdrop" onclick="toggleMenu()"></div>
 
-    <div class="container">
-        <div class="sidebar" id="sidebar">
-            <button class="close-menu-button md:hidden" onclick="toggleMenu()">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-            <h1 class="text-2xl font-bold mb-4">Módulos del Taller</h1>
-            <ul id="module-list" class="module-list">
-                <li onclick="loadModule('modulos/modulo1.html', this)">Módulo 1: La Llamada Interior</li>
-                <li onclick="loadModule('modulos/modulo2.html', this)">Módulo 2: Comprendiendo Tu Campo Energético</li>
-                <li onclick="loadModule('modulos/modulo3.html', this)">Módulo 3: Limpieza y Protección Energética</li>
-                <li onclick="loadModule('modulos/modulo4.html', this)">BONUS: El Poder De Tu Mente Subconsciente</li>
-                <li onclick="loadModule('modulos/modulo5.html', this)">Módulo 4: Las Frecuencias que Sanan</li>
-                <li onclick="loadModule('modulos/modulo6.html', this)">Módulo 5: Los 7 Chakras + el Chakra del Corazón Superior</li>
-                <li onclick="loadModule('modulos/modulo7.html', this)">Módulo 6: Manifestación desde el Alma</li>
-                <li onclick="loadModule('modulos/modulo8.html', this)">Módulo 7: Códigos Sagrados, Números y Señales</li>
-                <li onclick="loadModule('modulos/modulo9.html', this)">Módulo 8: Sanar el Pasado, Activar el Presente</li>
-                <li onclick="loadModule('modulos/modulo10.html', this)">Módulo 9: El Poder del Amor Propio</li>
-                <li onclick="loadModule('modulos/modulo11.html', this)">Módulo 10: Tu Nueva Realidad Energética</li>
-            </ul>
-            <button id="logout-button" class="logout-button mt-4">Cerrar Sesión</button>
-        </div>
-        
-        <div class="content-area">
-            <div id="welcome-message">
-                <h2 class="text-2xl">¡Bienvenido al Taller!</h2>
-                <p>Haz clic en un módulo de la lista para empezar.</p>
-            </div>
-            <div id="module-content">
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        const moduleContentDiv = document.getElementById('module-content');
-        const welcomeMessageDiv = document.getElementById('welcome-message');
-        const moduleList = document.querySelectorAll('.module-list li');
-        const sidebar = document.getElementById('sidebar');
-        const backdrop = document.querySelector('.backdrop');
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <button class="close-menu-button md:hidden" onclick="toggleMenu()">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h1 class="text-2xl font-bold mb-4">Módulos del Taller</h1>
+            <ul id="module-list" class="module-list">
+                <li onclick="loadModule('modulos/modulo1.html', this)">Módulo 1: La Llamada Interior</li>
+                <li onclick="loadModule('modulos/modulo2.html', this)">Módulo 2: Comprendiendo Tu Campo Energético</li>
+                <li onclick="loadModule('modulos/modulo3.html', this)">Módulo 3: Limpieza y Protección Energética</li>
+                <li onclick="loadModule('modulos/modulo4.html', this)">BONUS: El Poder De Tu Mente Subconsciente</li>
+                <li onclick="loadModule('modulos/modulo5.html', this)">Módulo 4: Las Frecuencias que Sanan</li>
+                <li onclick="loadModule('modulos/modulo6.html', this)">Módulo 5: Los 7 Chakras + el Chakra del Corazón Superior</li>
+                <li onclick="loadModule('modulos/modulo7.html', this)">Módulo 6: Manifestación desde el Alma</li>
+                <li onclick="loadModule('modulos/modulo8.html', this)">Módulo 7: Códigos Sagrados, Números y Señales</li>
+                <li onclick="loadModule('modulos/modulo9.html', this)">Módulo 8: Sanar el Pasado, Activar el Presente</li>
+                <li onclick="loadModule('modulos/modulo10.html', this)">Módulo 9: El Poder del Amor Propio</li>
+                <li onclick="loadModule('modulos/modulo11.html', this)">Módulo 10: Tu Nueva Realidad Energética</li>
+            </ul>
+            <button id="logout-button" class="logout-button mt-4">Cerrar Sesión</button>
+        </div>
+        
+        <div class="content-area">
+            <div id="welcome-message">
+                <h2 class="text-2xl">¡Bienvenido al Taller!</h2>
+                <p>Haz clic en un módulo de la lista para empezar.</p>
+            </div>
+            <div id="module-content">
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const moduleContentDiv = document.getElementById('module-content');
+        const welcomeMessageDiv = document.getElementById('welcome-message');
+        const moduleList = document.querySelectorAll('.module-list li');
+        const sidebar = document.getElementById('sidebar');
+        const backdrop = document.querySelector('.backdrop');
 
-        async function loadModule(moduleFileName, element) {
-            try {
-                welcomeMessageDiv.classList.add('hidden');
-                
-                moduleList.forEach(item => item.classList.remove('active'));
-                if (element) {
-                    element.classList.add('active');
-                }
+        async function loadModule(moduleFileName, element) {
+            try {
+                welcomeMessageDiv.classList.add('hidden');
+                
+                moduleList.forEach(item => item.classList.remove('active'));
+                if (element) {
+                    element.classList.add('active');
+                }
 
-                const response = await fetch(moduleFileName);
-                if (!response.ok) {
-                    throw new Error('Módulo no encontrado');
-                }
-                const html = await response.text();
-                moduleContentDiv.innerHTML = html;
-                
-                if (window.innerWidth < 768) {
-                    toggleMenu();
-                }
-            } catch (error) {
-                moduleContentDiv.innerHTML = `<h2 class="text-red-500">Error: ${error.message}</h2>`;
-            }
-        }
+                const response = await fetch(moduleFileName);
+                if (!response.ok) {
+                    throw new Error('Módulo no encontrado');
+                }
+                const html = await response.text();
+                moduleContentDiv.innerHTML = html;
+                
+                if (window.innerWidth < 768) {
+                    toggleMenu();
+                }
+            } catch (error) {
+                moduleContentDiv.innerHTML = `<h2 class="text-red-500">Error: ${error.message}</h2>`;
+            }
+        }
 
-        function toggleMenu() {
-            sidebar.classList.toggle('active');
-            backdrop.classList.toggle('active');
-        }
+        function toggleMenu() {
+            sidebar.classList.toggle('active');
+            backdrop.classList.toggle('active');
+        }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const firstModuleItem = document.querySelector('.module-list li');
-            if (firstModuleItem) {
-                const moduleFileName = firstModuleItem.getAttribute('onclick').match(/'([^']+)'/)[1];
-                loadModule(moduleFileName, firstModuleItem);
-            }
-        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstModuleItem = document.querySelector('.module-list li');
+            if (firstModuleItem) {
+                const moduleFileName = firstModuleItem.getAttribute('onclick').match(/'([^']+)'/)[1];
+                loadModule(moduleFileName, firstModuleItem);
+            }
+        });
 
-        document.getElementById('logout-button').onclick = () => {
-            sessionStorage.removeItem('isLoggedIn');
-            window.location.href = 'taller.html';
-        };
-    </script>
+        document.getElementById('logout-button').onclick = () => {
+            sessionStorage.removeItem('isLoggedIn');
+            window.location.href = 'taller.html';
+        };
+    </script>
 </body>
 </html>
