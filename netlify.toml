@@ -1,8 +1,4 @@
-[build]
-  publish = "."
-
-[[redirects]]
-  from = "/"
-  to = "/taller.html"
-  status = 301
-  force = true
+[functions]
+  directory = "netlify/functions"
+  [build]
+  command = "npm install --prefix ./netlify/functions"
