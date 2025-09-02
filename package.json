@@ -1,0 +1,14 @@
+{
+  "name": "taller-proyecto",
+  "version": "1.0.0",
+  "description": "Proyecto del taller de transformación energética",
+  "scripts": {
+    "netlify-build": "npm --prefix ./netlify/functions install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.4"
+  }
+}
