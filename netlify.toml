@@ -3,12 +3,6 @@
 
 [[redirects]]
   from = "/"
-  to = "/login-taller.html"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/logout-taller.html"
-  to = "/login-taller.html"
+  to = "/taller.html"
   status = 301
   force = true
