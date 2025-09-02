@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taller de Transformación Energética</title>
     <script>
-        // LÓGICA DE PROTECCIÓN: Si no hay sesión, redirige al login del taller.
+        // LÓGICA DE PROTECCIÓN: Si no hay sesión, redirige al login.
         if (sessionStorage.getItem('isLoggedIn') !== 'true') {
-            window.location.href = 'taller.html';
+            window.location.href = 'index.html'; // Redirige a index.html
         }
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -218,7 +218,7 @@
 
         document.getElementById('logout-button').onclick = () => {
             sessionStorage.removeItem('isLoggedIn');
-            window.location.href = 'taller.html';
+            window.location.href = 'index.html'; // Redirige a index.html
         };
     </script>
 </body>
