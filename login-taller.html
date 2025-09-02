@@ -58,6 +58,7 @@
             transform: scale(1.03);
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div class="container max-w-sm w-full">
@@ -96,37 +97,5 @@
     </div>
 
     <script>
-        document.getElementById('login-form-taller').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const email = document.getElementById('email-taller').value;
-            const password = document.getElementById('password-taller').value;
-            const statusMessage = document.getElementById('status-message-taller');
-            
-            // Reemplaza con tus credenciales seguras.
-            // En un entorno de producción, nunca harías esto, pero para esta
-            // implementación simple, es la única forma.
-            const validEmail = 'hola@frecuenciassanadoras.com';
-            const validPassword = 'supercontraseña';
-            
-            if (email === validEmail && password === validPassword) {
-                // Guarda un indicador de que la sesión está activa
-                sessionStorage.setItem('isLoggedIn', 'true');
-                
-                statusMessage.textContent = '¡Inicio de sesión exitoso! Redirigiendo...';
-                statusMessage.className = 'text-center mt-4 text-sm font-medium text-green-500';
-                statusMessage.classList.remove('hidden');
-                
-                // Redirige al usuario al panel principal del taller
-                setTimeout(() => {
-                    window.location.href = 'taller-contenido.html';
-                }, 1000);
-                
-            } else {
-                statusMessage.textContent = 'Correo electrónico o contraseña incorrectos.';
-                statusMessage.className = 'text-center mt-4 text-sm font-medium text-red-500';
-                statusMessage.classList.remove('hidden');
-            }
-        });
-    </script>
-</body>
-</html>
+        // Inicializa el cliente de Supabase con tus credenciales.
+        // OJO: REEMPL
