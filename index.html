@@ -1,131 +1,139 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso al Taller</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: #111827;
-            font-family: 'Inter', sans-serif;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 1rem;
-            box-sizing: border-box;
-        }
-        .container {
-            background: rgba(31, 41, 55, 0.9);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
-            padding: 2rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            max-width: 450px;
-            width: 100%;
-        }
-        .input-field {
-            background-color: #374151;
-            border: 1px solid #4b5563;
-            color: #fff;
-        }
-        .button-primary {
-            background: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
-            transition: transform 0.2s ease-in-out;
-        }
-        .button-primary:hover {
-            transform: scale(1.03);
-        }
-        .whatsapp-button {
-            background-color: #25d366;
-            transition: transform 0.2s ease-in-out;
-        }
-        .whatsapp-button:hover {
-            transform: scale(1.03);
-        }
-        .hotmart-button {
-            background-color: #ff8c00;
-            transition: transform 0.2s ease-in-out;
-        }
-        .hotmart-button:hover {
-            transform: scale(1.03);
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso al Taller</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #111827;
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+        .container {
+            background: rgba(31, 41, 55, 0.9);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            max-width: 450px;
+            width: 100%;
+        }
+        .input-field {
+            background-color: #374151;
+            border: 1px solid #4b5563;
+            color: #fff;
+        }
+        .button-primary {
+            background: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
+            transition: transform 0.2s ease-in-out;
+        }
+        .button-primary:hover {
+            transform: scale(1.03); /* Ligeramente menos que el otro para variar, o puedes igualarlo */
+        }
+        .whatsapp-button {
+            background-color: #25d366;
+            transition: transform 0.2s ease-in-out;
+        }
+        .whatsapp-button:hover {
+            transform: scale(1.03);
+        }
+        /* Estilo específico para el botón de Hotmart que ahora es "Unirme al Taller Ahora" */
+        .hotmart-button {
+            background-color: #ff8c00; /* Color naranja Hotmart */
+            transition: transform 0.2s ease-in-out;
+        }
+        .hotmart-button:hover {
+            transform: scale(1.03);
+        }
+    </style>
 </head>
 <body>
-    <div class="container max-w-sm w-full">
-        <h1 class="text-3xl font-bold text-center mb-6">Iniciar Sesión</h1>
-        <form id="login-form-taller" class="flex flex-col gap-4">
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-400">Correo Electrónico</label>
-                <input type="email" id="email-taller" name="email" required class="input-field mt-1 block w-full rounded-md shadow-sm p-3">
-            </div>
-            <div>
-                <label for="password" class="block text-sm font-medium text-gray-400">Contraseña</label>
-                <input type="password" id="password-taller" name="password" required class="input-field mt-1 block w-full rounded-md shadow-sm p-3">
-            </div>
-            <button type="submit" class="button-primary mt-4 w-full text-white font-bold py-3 px-4 rounded-lg shadow-lg">
-                Acceder al Taller
-            </button>
-        </form>
-        <div class="mt-8 text-center">
-            <p class="text-gray-400 text-sm italic mb-4">
-                No postergues tu despertar, tu momento es hoy. Dentro encontrarás 10 módulos con prácticas energéticas, meditaciones, rituales y recursos para elevar tu vibración y transformar tu vida desde adentro.
-            </p>
-            <a href="https://pay.hotmart.com/J99664409O?off=ompz33n5&checkoutMode=10" target="_blank" class="w-full mt-2 text-white font-bold py-3 px-4 rounded-lg shadow-lg flex items-center justify-center gap-2 hotmart-button">
-                <span>Unirme al Taller Ahora</span>
-            </a>
-        </div>
-        <div class="mt-8 pt-6 border-t border-gray-700">
-            <p class="text-gray-400 text-sm mb-2">¿Ya adquiriste el taller?</p>
-            <a href="https://wa.link/7eycpg" target="_blank" class="w-full mt-2 text-white font-bold py-3 px-4 rounded-lg shadow-lg flex items-center justify-center gap-2 whatsapp-button">
-                <span>Solicitar contraseña</span>
-            </a>
-        </div>
-        <div id="status-message-taller" class="text-center mt-4 text-sm font-medium hidden"></div>
-    </div>
-    <script>
-        document.getElementById('login-form-taller').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const email = document.getElementById('email-taller').value;
-            const password = document.getElementById('password-taller').value;
-            const statusMessage = document.getElementById('status-message-taller');
-            statusMessage.textContent = 'Cargando...';
-            statusMessage.className = 'text-center mt-4 text-sm font-medium text-gray-400';
-            statusMessage.classList.remove('hidden');
-            try {
-                const response = await fetch('/.netlify/functions/taller-login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email, password })
-                });
-                const result = await response.json();
-                if (response.ok) {
-                    statusMessage.textContent = '¡Inicio de sesión exitoso! Redirigiendo...';
-                    statusMessage.className = 'text-center mt-4 text-sm font-medium text-green-500';
-                    sessionStorage.setItem('isLoggedIn', 'true');
-                    setTimeout(() => {
-                        window.location.href = 'taller-contenido.html';
-                    }, 1000);
-                } else {
-                    statusMessage.textContent = result.message || 'Error en el inicio de sesión';
-                    statusMessage.className = 'text-center mt-4 text-sm font-medium text-red-500';
-                }
-            } catch (error) {
-                console.error('Error de red:', error);
-                statusMessage.textContent = 'Error de conexión. Intenta de nuevo.';
-                statusMessage.className = 'text-center mt-4 text-sm font-medium text-red-500';
-            }
-        });
-    </script>
+    <div class="container max-w-sm w-full">
+        <h1 class="text-3xl font-bold text-center mb-6">Iniciar Sesión</h1>
+        <form id="login-form-taller" class="flex flex-col gap-4">
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-400">Correo Electrónico</label>
+                <input type="email" id="email-taller" name="email" required class="input-field mt-1 block w-full rounded-md shadow-sm p-3">
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-400">Contraseña</label>
+                <input type="password" id="password-taller" name="password" required class="input-field mt-1 block w-full rounded-md shadow-sm p-3">
+            </div>
+            <button type="submit" class="button-primary mt-4 w-full text-white font-bold py-3 px-4 rounded-lg shadow-lg">
+                Acceder al Taller
+            </button>
+        </form>
+
+        <div class="mt-8 text-center">
+            <p class="text-gray-400 text-sm italic mb-4">
+                No postergues tu despertar, tu momento es hoy. Dentro encontrarás 10 módulos con prácticas energéticas, meditaciones, rituales y recursos para elevar tu vibración y transformar tu vida desde adentro.
+            </p>
+            <a href="https://pay.hotmart.com/J99664409O?off=ompz33n5&checkoutMode=10" target="_blank" class="w-full mt-2 text-white font-bold py-3 px-4 rounded-lg shadow-lg flex items-center justify-center gap-2 hotmart-button">
+                <span>Unirme al Taller Ahora</span>
+            </a>
+        </div>
+        
+        <div class="mt-8 pt-6 border-t border-gray-700">
+            <p class="text-gray-400 text-sm mb-2">¿Ya adquiriste el taller?</p>
+            <a href="https://wa.link/7eycpg" target="_blank" class="w-full mt-2 text-white font-bold py-3 px-4 rounded-lg shadow-lg flex items-center justify-center gap-2 whatsapp-button">
+                <span>Solicitar contraseña</span>
+            </a>
+        </div>
+
+        <div id="status-message-taller" class="text-center mt-4 text-sm font-medium hidden"></div>
+    </div>
+
+    <script>
+        document.getElementById('login-form-taller').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email-taller').value;
+            const password = document.getElementById('password-taller').value;
+            const statusMessage = document.getElementById('status-message-taller');
+            
+            statusMessage.textContent = 'Cargando...';
+            statusMessage.className = 'text-center mt-4 text-sm font-medium text-gray-400';
+            statusMessage.classList.remove('hidden');
+
+            try {
+                const response = await fetch('/.netlify/functions/taller-login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    statusMessage.textContent = '¡Inicio de sesión exitoso! Redirigiendo...';
+                    statusMessage.className = 'text-center mt-4 text-sm font-medium text-green-500';
+                    setTimeout(() => {
+                        window.location.href = 'taller-contenido.html';
+                    }, 1000);
+                } else {
+                    statusMessage.textContent = result.message || 'Error en el inicio de sesión';
+                    statusMessage.className = 'text-center mt-4 text-sm font-medium text-red-500';
+                }
+            } catch (error) {
+                console.error('Error de red:', error);
+                statusMessage.textContent = 'Error de conexión. Intenta de nuevo.';
+                statusMessage.className = 'text-center mt-4 text-sm font-medium text-red-500';
+            }
+        });
+    </script>
 </body>
 </html>
