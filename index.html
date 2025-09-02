@@ -112,6 +112,7 @@
                 if (response.ok) {
                     statusMessage.textContent = '¡Inicio de sesión exitoso! Redirigiendo...';
                     statusMessage.className = 'text-center mt-4 text-sm font-medium text-green-500';
+                    sessionStorage.setItem('isLoggedIn', 'true');
                     setTimeout(() => {
                         window.location.href = 'taller-contenido.html';
                     }, 1000);
