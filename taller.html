@@ -62,7 +62,7 @@
 </head>
 <body>
     <div class="container max-w-sm w-full">
-        <h1 class="text-3xl font-bold text-center mb-6">Iniciar Sesión</h1>
+        <h1 class="text-3xl font-bold text-center mb-6">Acceso al Taller</h1>
         <form id="login-form-taller" class="flex flex-col gap-4">
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-400">Correo Electrónico</label>
@@ -129,7 +129,7 @@
                     statusMessage.textContent = '¡Inicio de sesión exitoso! Redirigiendo...';
                     statusMessage.className = 'text-center mt-4 text-sm font-medium text-green-500';
                     
-                    // Redirige al usuario al panel
+                    // Redirige al usuario al panel del taller
                     setTimeout(() => {
                         window.location.href = 'taller-contenido.html';
                     }, 1000);
